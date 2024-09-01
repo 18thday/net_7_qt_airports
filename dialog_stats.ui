@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DialogStats</class>
+ <widget class="QDialog" name="DialogStats">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>865</width>
+    <height>679</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Airport Stats</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="2" column="1">
+    <widget class="QPushButton" name="pb_close">
+     <property name="text">
+      <string>Закрыть</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="lb_airport_name">
+     <property name="text">
+      <string>Аэропорт</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <spacer name="hs_close">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="tabPosition">
+      <enum>QTabWidget::North</enum>
+     </property>
+     <property name="tabShape">
+      <enum>QTabWidget::Rounded</enum>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <property name="elideMode">
+      <enum>Qt::ElideNone</enum>
+     </property>
+     <widget class="QWidget" name="tab_stats_year">
+      <attribute name="title">
+       <string>Загруженность за год</string>
+      </attribute>
+      <layout class="QGridLayout" name="gl_tab_stats_year"/>
+     </widget>
+     <widget class="QWidget" name="tab_stats_month">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <attribute name="title">
+       <string>Загруженность за месяц</string>
+      </attribute>
+      <layout class="QGridLayout" name="gl_tab_stats_month">
+       <item row="0" column="2">
+        <widget class="QComboBox" name="cb_month">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>0</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Январь</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Февраль</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Март</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Апрель</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Май</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Июнь</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Июль</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Август</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Сентябрь</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Октябрь</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Ноябрь</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Декабрь</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="lb_month">
+         <property name="text">
+          <string>Месяц:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <spacer name="hs_month">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0" colspan="3">
+        <widget class="QWidget" name="wid_plot" native="true">
+         <layout class="QGridLayout" name="gl_wid_plot">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
