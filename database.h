@@ -42,7 +42,8 @@ public:
     void GetAirports();
     void GetArrivalFlights(QString airport_code, QDate date);
     void GetDepartureFlights(QString airport_code, QDate date);
-    void GetStatsByDayPerYearForAirport(QString airport_code, int month);
+    void GetStatsByDayPerYearForAirport(QString airport_code);
+    void GetStatsByDayPerMonthForAirport(QString airport_code, int month);
     void GetStatsByMonthPerYearForAirport(QString airport_code);
     const QSqlDatabase& GetDataBase() const;
 
@@ -50,9 +51,9 @@ signals:
     void SendStatusConnectionToDB(bool status);
     void SendAirports(QMap<QString, QString> airports);
     void SendFlightsInfo(QSqlQueryModel* flights_info);
-    void SendStatsByDayPerYear(QSqlQueryModel* stats_day_per_year);
+    void SendStatsByDayPerMonth(QSqlQueryModel* stats_day_per_month);
     void SendStatsByMonthPerYear(QSqlQueryModel* stats_month_per_year);
-
+    void SendStatsByDayPerYear(QSqlQueryModel* stats_day_per_year);
 
 private:
     QSqlDatabase* db_;

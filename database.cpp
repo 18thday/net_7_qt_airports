@@ -108,7 +108,23 @@ void DataBase::GetDepartureFlights(QString airport_code, QDate date)
     emit SendFlightsInfo(qm_);
 }
 
-void DataBase::GetStatsByDayPerYearForAirport(QString airport_code, int month)
+void DataBase::GetStatsByDayPerYearForAirport(QString airport_code)
+{
+    QString query = "SELECT count(flight_no) AS cnt, date_trunc('day', scheduled_departure) AS d "
+                    "FROM bookings.flights AS f "
+                    "WHERE (scheduled_departure::date > date('2016-08-31') "
+                    "AND scheduled_departure::date <= date('2017-08-31')) "
+                    "AND ((departure_airport = '" + airport_code + "') "
+                    "OR (arrival_airport = '" + airport_code + "')) "
+                    "GROUP BY d";
+    qDebug() << query;
+    qm_stats_->setQuery(query, GetDataBase());
+    qDebug() << qm_stats_->rowCount();
+
+    emit SendStatsByDayPerYear(qm_stats_);
+}
+
+void DataBase::GetStatsByDayPerMonthForAirport(QString airport_code, int month)
 {
     int year = month > 8 ? 2016 : 2017;
     QCalendar qcal;
@@ -125,7 +141,7 @@ void DataBase::GetStatsByDayPerYearForAirport(QString airport_code, int month)
     qm_stats_->setQuery(query, GetDataBase());
     qDebug() << qm_stats_->rowCount();
 
-    emit SendStatsByDayPerYear(qm_stats_);
+    emit SendStatsByDayPerMonth(qm_stats_);
 }
 
 void DataBase::GetStatsByMonthPerYearForAirport(QString airport_code)

@@ -31,12 +31,15 @@ public:
     void UpdatePlotStatsPerDayInMonth(const QString& airport_code);
     void UpdatePlotStatsPerMonthInYear(const QString& airport_code);
 
+    void PlotStatsPerDayInMonthFromDB();
     void PlotStatsPerDayInMonth();
     void PlotStatsPerMonthInYear();
 
 public slots:
+    void ReceiveStatsByDayPerMonth(QSqlQueryModel* qm);
     void ReceiveStatsByDayPerYear(QSqlQueryModel* qm);
     void ReceiveStatsByMonthPerYear(QSqlQueryModel* qm);
+
 
 private slots:
     void on_pb_close_clicked();
@@ -47,6 +50,7 @@ private:
     Ui::DialogStats *ui;
     DataBase* db_;
     QString airport_code_;
+    QMap<int, QMap<int, int>> stats_month_to_day_to_cnt_;
 
     QLineSeries* qls_stats_per_d_in_m;
     QBarSet* qbs_data;

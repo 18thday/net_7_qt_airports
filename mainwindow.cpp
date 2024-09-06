@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // CONNECT
     connect(db, &DataBase::SendStatusConnectionToDB, this, &MainWindow::ReceiveStatusConnectionToDB);
-    connect(msg, &QMessageBox::buttonClicked, this, &MainWindow::StartTimerForConnectionToDB);
+    connect(msg, &QMessageBox::finished, this, &MainWindow::StartTimerForConnectionToDB);
     connect(timer, &QTimer::timeout, db, &DataBase::TryToConnect);
     connect(db, &DataBase::SendAirports, this, &MainWindow::ReceiveAirports);
     connect(db, &DataBase::SendFlightsInfo, this, &MainWindow::ReceiveFlightsInfo);
@@ -60,15 +60,18 @@ void MainWindow::ReceiveStatusConnectionToDB(bool status)
         ui->statusbar->clearMessage();
         ui->act_db_conn->setText("Отключиться");
         db->GetAirports();
+        UpdateUIEnable();
 
     } else {
         is_connected_to_db = false;
         UpdateConnectionStatus();
+        UpdateUIEnable();
 
         timer->stop();
         msg->setIcon(QMessageBox::Critical);
         msg->setText(db->GetLastError().text());
         msg->exec();
+        UpdateUIEnable();
     }
 }
 
@@ -116,14 +119,13 @@ void MainWindow::UpdateUIEnable()
 {
     if (is_connected_to_db) {
         ui->gb_airport_data->setEnabled(true);
+        if (ui->cb_airport->count() != 0) {
+            ui->pb_flight_info->setEnabled(true);
+            ui->gb_stats->setEnabled(true);
+        }
     } else {
         ui->gb_airport_data->setEnabled(false);
         ui->gb_stats->setEnabled(false);
-    }
-
-    if (ui->cb_airport->count() != 0) {
-        ui->pb_flight_info->setEnabled(true);
-        ui->gb_stats->setEnabled(true);
     }
 }
 
@@ -146,6 +148,7 @@ void MainWindow::on_act_db_conn_triggered()
         ui->act_db_conn->setText("Подключиться");
         is_connected_to_db = false;
         UpdateConnectionStatus();
+        UpdateUIEnable();
     }
 }
 
